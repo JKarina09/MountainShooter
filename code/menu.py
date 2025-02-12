@@ -7,7 +7,7 @@ import pygame.image
 import pygame
 from pygame import Surface, Rect
 
-from code.Const import WIN_WIDTH
+from code.Const import WIN_WIDTH, COLOR_ORANGE, MENU_OPTION, C_WHITE
 
 
 class Menu:
@@ -16,17 +16,24 @@ class Menu:
         self.surf = pygame.image.load('./asset/MenuBg.png')
         self.rect = self.surf.get_rect(left=0, top=0)
 
-
     def run(self):
         pygame.mixer_music.load('./asset/Menu.mp3')
         pygame.mixer_music.play(-1)
 
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
-            self.menu_text(text_size=50, text='Mountain',text_color=(255, 125, 0), text_center_pos=((WIN_WIDTH/2),70))
+            self.menu_text(text_size=50, text='Mountain', text_color=COLOR_ORANGE,
+                           text_center_pos=((WIN_WIDTH / 2), 70))
+            self.menu_text(text_size=50, text='Shooter', text_color=COLOR_ORANGE,
+                           text_center_pos=((WIN_WIDTH / 2), 120))
+
+            for i in range(len(MENU_OPTION)):
+                self.menu_text(text_size=20, text=MENU_OPTION[i], text_color=C_WHITE,
+                               text_center_pos=((WIN_WIDTH / 2), 200 + 25 * i))
+
             pygame.display.flip()
 
-           #check for all events
+            # check for all events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
